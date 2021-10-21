@@ -41,28 +41,53 @@ def affine_decrypt(ciphertext, key):
 def main():
     # driver function
     try:
-        # Enter a plaintext
-        plaintext = input("Enter plaintext: ")
+        print("""
+    Additive cipher:
+    0. Exit
+    1. Encrypt
+    2. Decrypt""")
 
-        # Enter key 1
-        key1 = input("Enter key index 0 (a), say 17: ")
-        while not key1.isdigit():
-            key1 = input("The key index 0 should be an integer, Enter again: ")
+        ch = 1
+        while(ch != 0):
 
-        # Enter key 2
-        key2 = input("Enter key index 1 (b = coprime(a)), say 20: ")
-        while not key2.isdigit():
-            key2 = input("The key index 1 should be an integer, Enter again: ")
+            ch = int(input("\nEnter your choice: "))
+            if(ch == 1):
+                plaintext = input("\nEnter plaintext: ")
+
+                # Enter key 1
+                key1 = input("Enter key index 0 (a), say 17: ")
+                while not key1.isdigit():
+                    key1 = input("The key index 0 should be an integer, Enter again: ")
+
+                # Enter key 2
+                key2 = input("Enter key index 1 (b = coprime(a)), say 20: ")
+                while not key2.isdigit():
+                    key2 = input("The key index 1 should be an integer, Enter again: ")
+
+                key = (int(key1), int(key2))
+
+                ciphertext = affine_encrypt(plaintext, key)
+                print("Encrypted text : " + ciphertext)
+
             
-        key = [int(key1), int(key2)]
+            elif(ch == 2):
+                plaintext = input("\nEnter encrypted text: ")
 
-        # Encrypting
-        ciphertext = affine_encrypt(plaintext, key)
-        print("Encrypted text : " + ciphertext)
+                # Enter key 1
+                key1 = input("Enter key index 0 (a), say 17: ")
+                while not key1.isdigit():
+                    key1 = input("The key index 0 should be an integer, Enter again: ")
 
-        # Decrypting
-        plaintext = affine_decrypt(ciphertext, key)
-        print("Decrypted text : " + plaintext)
+                # Enter key 2
+                key2 = input("Enter key index 1 (b = coprime(a)), say 20: ")
+                while not key2.isdigit():
+                    key2 = input("The key index 1 should be an integer, Enter again: ")
+
+                key = (int(key1), int(key2))
+
+                # Decrypting
+                plaintext = affine_decrypt(ciphertext, key)
+                print("Decrypted text : " + plaintext)
 
     except Exception as e:
         print(e)
